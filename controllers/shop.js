@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const Cart = require("../models/cart");
 
 module.exports = {
 	getProducts: (req, res) => {
@@ -13,9 +14,23 @@ module.exports = {
 		});
 	},
 
+	getProduct: (req, res) => {
+		const prodId = req.params.productId;
+		console.log(
+			Product.findById(prodId, (product) => {
+				// shope/product-details is not link but file location
+				res.render("shop/product-detail", {
+					product: product,
+					pageTitle: product.title,
+					path: "/products",
+				});
+			})
+		);
+	},
+
 	deleteProduct: (req, res) => {
 		const product = new Product("dummy");
-		product.delete(Number(req.body.index), (data) => {
+		product.delete(req.params.productId, (data) => {
 			res.redirect("/");
 		});
 	},
@@ -35,6 +50,14 @@ module.exports = {
 			pageTitle: "Your Cart",
 			path: "/cart",
 		});
+	},
+
+	postCart: (req, res, next) => {
+		const prodId = req.body.productId;
+		Product.findById(prodId, (product) => {
+			Cart.addProduct(prodId, product.price);
+		});
+		res.redirect("/cart");
 	},
 
 	getOrders: (req, res, next) => {

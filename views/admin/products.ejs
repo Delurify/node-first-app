@@ -8,7 +8,7 @@
 			<% if(prods.length > 0) { %>
 				<div class="grid">
 					<% for(let [index, product] of prods.entries()) { %>
-				<form class="product-container" method="POST" action="/admin/delete-product">
+				<form class="product-container" method="DELETE" action="/admin/-product">
 					<input type="text" name="index" value="<%= index %>" hidden/>
 					<article class="card product-item">
 						<header class="card__header">
@@ -27,7 +27,7 @@
 							</p>
 						</div>
 						<div class="card__actions">
-							<a href="/admin/edit-product" class="btn">Edit</a>
+							<a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn">Edit</a>
 							<button class="btn delete" type="submit">Delete</button>
 						</div>
 					</article>

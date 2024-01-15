@@ -8,7 +8,7 @@
 			<% if(prods.length > 0) { %>
 				<div class="grid">
 					<% for(let [index, product] of prods.entries()) { %>
-				<form class="product-container" method="POST" action="/add-to-cart">
+				<form class="product-container" method="POST" action="/cart">
 					<input type="text" name="index" value="<%= index %>" hidden/>
 					<article class="card product-item">
 						<header class="card__header">
@@ -27,7 +27,7 @@
 							</p>
 						</div>
 						<div class="card__actions">
-							<button class="btn" type="submit">Add To Cart</button>
+							<%- include('../includes/add-to-cart.ejs', {product: product}) %>
 						</div>
 					</article>
 				</form> 

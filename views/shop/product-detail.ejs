@@ -2,8 +2,15 @@
 	</head>
 	<body>
 		<%- include('../includes/navigation.ejs') %>
-		<main>
-			<h1>Product detail ejs</h1>
+		<main class="centered">
+			<h1><%= product.title %></h1>
+			<hr>
+			<div>
+				<img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+			</div>
+			<h3><%= product.price %></h3>
+			<p><%= product.description %></p>
+			<%- include('../includes/add-to-cart.ejs') %>
 		</main>
 
 <%- include('../includes/end.ejs') %>
